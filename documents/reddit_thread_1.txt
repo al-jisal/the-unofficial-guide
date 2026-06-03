@@ -1,0 +1,181 @@
+Question:
+An incoming freshman in Computer Science. I was placed into MA160 for math and would be very grateful for any suggestions on the other choices.
+
+Comments:
+If you’ve taken AP CS, you can likely place out of the intro CS courses (CS151/152). That’s what I did, and it’ll put you slightly ahead. If not,
+I’ve heard great things about CS151/152 regardless.Yeah and just try to get your general requirements out of the way. If you’re trying to graduate
+with the CS major, you can take one CS course a semester and I believe two semesters of the 8 where you’ll need to double up, but I wouldn’t 
+recommend it for your first semester. Hope this helps.
+
+Hey, skipping cs151 means being placed right into cs231 or cs166? If the former, who should I contact to test out of the intro cs classes?
+
+I’ve never heard of cs166, it might be a new course? I was able to place into CS231. If you’re a CS major, you’re likely to be assigned a CS professor
+as your advisor. I’d contact them.
+
+I would definitely recommend taking four classes, you could still graduate with three, but most people take four, and your advisor will likely suggest
+u take a fourth I would recommend taking CS152, MA160, and a W1 class. Since it's your first semester, taking only three courses will ease up your
+workload a lot, but if you want to take a fourth class I would try to take something in another topic that interests you.
+
+Dont we have to take a language class as well?
+
+You are allowed to test out of language if u have a foreign language ur good at. Many internationals do it. If not, then yea u gotta take it.
+
+I could do that but i actually wanna learn german
+
+Yk now that im thinking abt it. I could test out of language requirement and take some other bussin class
+
+Language is lame to me cause if u ain’t gonna commit to it, you’ll forget about it in no time. Like I know many peeps who take Japanese all the way till
+their senior year and goes to abroad to Japan and have a fucking blast. But if ur doing it just for requirement, just test out and save ur time.
+
+thanks! do you have any suggestions about which w1 class to take?
+
+I always suggest taking 4 because you want to finish ur gen req early. I have friends who r juniors and seniors trying to get into intro courses later
+on and can’t and then forced to settle for like some random class just for that req.
+
+If there is “Russia Reels” I suggest that. You watch Russian films and do a couple small writing and then a couple big writings as well. I found the film
+very enjoyable and it was like one of the easiest W1 out there. Also fulfills the arts requirement
+
+
+Question:
+I'm choosing between Wesleyan University and Colby College, and a big difference between the two seems to lie in the core curriculum.
+- Can anyone speak to how (un)restricting the course distribution requirement feel at Colby College?
+- Also, is it easy to get the courses I want within the core at Colby College?
+This is coming from someone wanting to double major in Econ and English, and does not enjoy the hard, natural sciences. Thanks!!
+
+Comments:
+I’m a freshman at colby and i’ll be done with all my course distribution requirements save for language and US diversity (super easy with my major) by the
+end of this year because of aps and how easy it is to fulfill requirements. There has been some difficulty getting into some courses, especially as a freshman,
+but the waitlists normally move really fast and i’ve had multiple friends email teachers to ask to be let into classes and nobody has ever gotten a no. Once
+you declare your major it’s a lot easier to get the classes you want, as a certain number of seats in each are reserved for majors. Everything should be fine
+as long as you register right when classes open using a saved schedule
+
+Which school is cheaper for you and your family to pay for?
+
+its the same between the two. i didnt apply for financial aid (dont really need it), and didnt know I could get merit-based until a few days ago..
+
+We really liked the curriculum setup at Colby, plus their Jan-plan mini semesters during the winter. Unfortunately, my daughter was not granted admission,
+though she did apply to Colby Early Decision, as her first choice school. I have no idea how hard it is to get into the courses you want as a double major, likely
+with additional distribution requirements. Good luck though. Glad your family doesn't need financial aid.
+
+Thanks for the quick reply!
+
+My daughters haven’t had any issues at all. My almost senior will be taking astronomy. She was a psych major and did a lab through that. Like the lab and is now
+majoring in classic civilization and history with a focus on religion. For her language, she could’ve taken Spanish, but decided to do ancient Greek because it also
+contributed to her major.
+
+To edit sorry she did not like the lab.
+
+As a freshman, I haven’t had many issues with getting courses I want and I will have finished all but 2 of my distribution requirements by the end of this semester
+
+
+Question:
+Hi, I’m a first-year student and couldn’t attend the provided advising sessions. Could you guys please advise me on the recommended number and types of classes I
+should take this fall? I want to major in computer science, and maybe do the dual-engineering program the school has. And I was wondering if all students are
+admitted as undecided majors
+
+Comments:
+Most people take four (which I’d recommend) but you can ask your dean to take more if you want (not a hard process). Dual degree requires a bit more planning
+(I believe, as someone not in it but with friends who did it). I’d email Prof Doore and ask for the recommended sequence. Everyone starts undecided (you can’t declare
+until sophomore year) and I’d encourage you to explore (it is a liberal arts school, after all). Your only required course will be your W1 (first year writing course),
+and there are a bunch of classes that satisfy that requirements.
+
+Thank u so much. I managed to find the video for the dual engineering program so I'll use that. And I'll try to email Prof Doore for more info. Thanks again for help!
+
+I just signed up for classes and I think I'm fine, but out of curiosity where did you find the 3 2 engineering video?
+
+here's the link: https://video.colby.edu/media/First+Year+Pre-Engineering+Advising+Video+2025/1_k69lmive
+
+
+Question:
+I know classes are typically small. Are they more discussion collaborative based? A lecture style where everyone does their own thing? I know it varies by teacher probably but what is the norm?
+
+Comments:
+It really depends on the class and teacher. I’ve found that STEM classes are more lecture/seminar style. And while the vast majority of humanities classes I’ve taken are in my minor (Jewish studies),
+they have been much more discussion focused.
+
+Are you applying or did u get accepted? Accepted just curious what to expect
+
+Depends on the class. When you're picking your courses, Workday will show u whether it's a lecture-type class or a discussion-type class.
+
+It entirely depends on the kind of class you take, but generally you should expect a good mix of both. If you are more stem focused, you might have more lectures and labs than seminars.
+
+
+Question:
+Hi guys, I will be attending Colby this Fall! I haven’t decided my major yet, but Im considering Math and CS. Is there any interesting course that you recommend taking during my first year at school?
+Also, how many clubs should I join so as to balance between schoolwork and social life? Thank you
+
+Comments:
+Definitely take CS 151 if you're interested in that. I was a math/CS double major and it was great. I will definitely take that
+
+Hello! I'm a math major who's considering a CS minor, so I have abit to say about this. I highly recommend taking MA161 (Honors Calc) in the fall, and no other math class for now. There's many reason
+for this: It's a tremendously fun class
+
+It is proof-based, and as such the only real math class you can really take now. This adds to the fun: it's based on Spivak's calculus, which is sort of the bible of undergrad calculus built from the
+ground up... and I mean from the ground up! You'll learn the basic building blocks of math.
+
+It's hard. This is a good thing: it's a little less hard than other math classes, but it will give you a good idea of what you're in for. If you can do it, you can probably survive the math major. But
+for many, their first interaction with really rigorous college-level math is too much. I recommend having that interaction early on, and seeing if you still like math.
+
+While it's hard, there's no prerequisites. The professor knows you have never done this kind of math before. It's doable. Most importantly, it's topics that you already have an intuitive (but not rigorous!)
+understanding of; learning how to do proofs while also learning Linear Algebra or Abstract Algebra, which are likely the next two courses you'd take... is a lot harder.
+
+It actually fulfills MA274 requirement if you complete both 161-162 with good grades. The alternative is to take normal calc if you need it, and then MA274 (Mathematical Reasoning) as soon as possible.
+
+But once again, undergrad math is quite different from high-school math. It's a different approach, different topics, and a whole lot more rigour. So trying 261 is a good way to get a taste of what's in for
+you... it's the perfect combination of manageable hardness and exposure to mathematical beauty.
+
+For CS I have a lot less to say. I actually skipped 151 because I already knew how to code and jumped straight to CS231. 151/231 are the two classes that basically everything else requires, so you can't
+really do any of the other ones for now.
+
+One more thing: don't be too afraid to try higher level classes in your first year. They can be challenging, but also really interesting. I ended up taking a 200 level history class fall freshman year and
+that was really fun and manageable. Don't let the number frighten you too much! But also don't take 4 classes all 200-level. Balance a bit. This especially applies if you take MA261.
+
+I’m also planning to begin with MA161 to challenge myself a little. How did you skip CS151? Did you submit AP score or any certificate?
+
+If you have an AP score or anything like that, email the chair (she's great) and ask what to do. I also second taking MA 161.
+
+Did you end up getting credit for CS151? I took 151. If your AP score is high enough, then you probably can get credit for it.
+
+No certificate needed. I emailed Bruce Maxwell, who was the chair a couple yars ago, and told him that I thought I knew enough to skip CS151. He just made me complete a quick placement test; I think I could
+choose between python and java. Pretty easy if you know what you're doing...
+
+Who is teaching 161/2 these days? That's crazy that 162 counts for 274 now. I took those both simultaneously.
+
+I have a few pieces of advice regarding freshman year class selection:
+
+TAKE THREE CLASSES IN THE FALL—I cannot stress this enough. By taking three classes your first semester you’ll have enough time to engage with the entirely new process of college. I dropped my fourth class
+after about a month and my quality of life skyrocketed. I was able to actually talk with my professors, learn more, hang out with my friends, go to more club meetings, and party. Now partying might not be
+your thing, but a smaller workload your first semester allows you to engage in things you love outside of school. I wish somebody had told me to do this earlier.
+
+Don’t speed run your major—you may love math and CS (me too I’m majoring is CS and Government) but that doesn’t mean you have to take ALL THE CLASSES RIGHT NOW. Slow down a bit. Smell the proverbial flowers.
+Try to take at least one weird class every semester. Intro to the Old Testament?? Fuck it. Premodern art history!! Why not?
+
+There’s no correct path—you’re a completely different human today than you will be after your freshman year. It’s okay to be uncertain about majors and clubs. Just play it by ear. Take the classes that sound
+cool and join all the clubs that tickle your fancy. You can always change your mind. Best of luck on your journey 
+
+I actually don't know if I recommend taking three classes only in your starting semester. I did four and it was fine; but regardless of whether you can actually survive on four, dropping a class is super
+easy and pain-free for freshmen, even as the semester progresses. So taking four to see if you can handle it, and then dropping immediately if you can't... is a reasonably good plan. Anyway, I'd talk it over
+with your advisor.
+
+That's actually not necessarily true. You'll have to take at least 3 JanPlan courses, many of which are 3-credit. So you can easily take 3 classes "for free" one semester. That being said, I recommend doing
+that a bit later when the courses in your major become harder... Otherwise, taking 5 classes to make up for lost time is really hard and I do not recommend doing it. Unless you choose really easy classes
+you're in for a bad time...
+
+In my opinion, the rationale for taking three classes off the get go is the same for taking three when they’re all hard. The main difference is that life is just hard first semester freshman year. Though
+your advice is true—five classes is not particularly fun.
+
+
+Question:
+How’s PH241 course by Professor McCoy? Is it a class with reasonable grading criteria and testing?
+
+Comments:
+
+Personally, I dislike McCoy because of his teaching style. He uses the blackboard only and his notes requires like 12 large black board per class, so unless u got fast hands and can copy fast, I wouldn’t
+recommend it. He allows you to take picture of notes but I am lazy and never ever got notes from phone into my notebook. He is a very passionate professor and very fair. He genuinely wants you to learn and
+become a physics lover. Anyways, if ur into copying lots of notes, I would pick him.
+
+Hows the grade
+
+Grading is good. He curves a lot based on class average. Quizzes he drops the lowest grade but gotta watch out cause my quizzes were 3 questions and I got 2/3 so many times which is a 66…. Homework are weekly
+problem sets in the textbook. They are long and prob require 6-10 pages to complete (this is normal since math is the same).
+
