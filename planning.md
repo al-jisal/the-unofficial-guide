@@ -9,7 +9,11 @@
 
 ## Domain
 
-<!-- What domain did you choose? Why is this knowledge valuable and hard to find through official channels? -->
+Incoming Freshmen Course Selection Experience
+
+This is a knowledge base of upperclassmen's experiences with their freshman year course selection period: 
+the good and the bad. Unlike official sites that state only facts, this knowledge base captures the hustle
+of students and the strategies they found helpful. It is, however, scattered across different platforms like Reddit, so it's important that this project centralizes it.
 
 ---
 
@@ -20,16 +24,16 @@
 
 | # | Source | Description | URL or location |
 |---|--------|-------------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
+| 1 | Quora | What are some of the best courses to take for freshman year? | [Link to source](https://www.quora.com/Colby-College-What-are-some-of-the-best-courses-to-take-for-freshman-year) |
+| 2 | Reddit | If I have 32 credits heading into my freshman year, does that mean I could graduate a year early? | [Link to source](https://www.reddit.com/r/Colby/comments/15auahz/if_i_have_32_credits_heading_into_my_freshman/ ) |
+| 3 | Reddit | Any I interesting course recommendation for Math and CS? | [Link to source](https://www.reddit.com/r/Colby/comments/n4v3ml/choosing_courses_for_freshman_year/) |
+| 4 | Reddit | Tips to Prepare for Freshman Year | [Link to source](https://www.reddit.com/r/Colby/comments/13r76l1/tips_to_prepare_for_freshman_year/) |
+| 5 | Reddit | Would 5 courses (20 credit) be too much for first semester? | [Link to source](https://www.reddit.com/r/Colby/comments/14cs293/would_5_courses_20_credit_be_too_much_for_first/) |
+| 6 | Reddit | Understanding Course Requirement | [Link to source](https://www.reddit.com/r/Colby/comments/1df2kua/help_understanding_the_course_taking_requirments/) |
+| 7 | Reddit | Questions about first-year advising | [Link to source](https://www.reddit.com/r/Colby/comments/1dah8fs/questions_about_firstyear_advising/) |
+| 8 | Colby | Diversity and Distribution Areas Requirements | [Link to source](https://www.colby.edu/academics/first-year-advising/colbys-liberal-arts-curriculum/) |
+| 9 | Colby | Advicing: what to expect and how to prepare | [Link to source](https://www.colby.edu/academics/first-year-advising/advising-what-to-expect-and-how-to-prepare/) |
+| 10 | Colby | Advice from Departments | [Link to resource](https://www.colby.edu/academics/first-year-advising/advice-from-departments/) |
 
 ---
 
@@ -39,12 +43,18 @@
      State your chunk size (in tokens or characters), overlap size, and explain why those
      numbers fit the structure of your documents.
      A review-heavy corpus warrants different chunking than a long FAQ. -->
+Paragraph-based splitting. The documents texts are stepped through in paragraphs, as a result
+there is no overlap between chunks.
 
 **Chunk size:**
+Paragraph-level chunking (100 tokens)
 
 **Overlap:**
+No overlap
 
 **Reasoning:**
+In the document, each paragraph expresses a complete thought, responding to a specific question
+The paragraphs are of moderate sizes (3 - 6 sentences), resulting in a chunk size of about 100 tokens
 
 ---
 
@@ -57,10 +67,15 @@
      support, accuracy on domain-specific text, latency? -->
 
 **Embedding model:**
+all-MiniLM-L6-v2 via sentence-transformers
 
 **Top-k:**
+3
+Top 3 most relevant chunks result in less noise in generated responses
 
 **Production tradeoff reflection:**
+In production, a more complex model (e.g. OpenAI's `text-embedding-3-large`) would produce more accurate results
+However, that would come at a cost and add latency from network calls
 
 ---
 
@@ -87,9 +102,9 @@
      Consider: noisy or inconsistent documents, missing source attribution, off-topic
      retrieval, chunks that split key information across boundaries. -->
 
-1.
+1. Retrieval of chunks which are unrelated to students questions
 
-2.
+2. System responding confidently but wrongly to students questions
 
 ---
 
@@ -100,6 +115,24 @@
      Label each stage with the tool or library you're using.
      You can use ASCII art, a Mermaid diagram, or embed a sketch as an image.
      You'll use this diagram as context when prompting AI tools to implement each stage. -->
+```
+Student query
+    │
+    ▼
+[1] Document Ingestion             ──► Rule book text is chunked and stored once at startup
+    │
+    ▼
+[2] Chunking                       ──► recursive chunking: paragraph-based
+    │
+    ▼
+[3] Embedding + Vector Store       ──► all-MiniLM-L6-v2 + chromaDB
+    │
+    ▼
+[4] Retrieval                      ──► chromaDB
+    │
+    ▼
+[5] Generation                     ──► Groq( llama-3.3-70b-versatile )
+```
 
 ---
 
