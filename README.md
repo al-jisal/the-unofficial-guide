@@ -1,32 +1,14 @@
 # The Unofficial Guide — Project 1
 
-> **How to use this template:**
-> Complete each section *after* you've built and tested the corresponding part of your system.
-> Do not write placeholder text — if a section isn't done yet, leave it blank and come back.
-> Every section below is required for submission. One-liners will not receive full credit.
-
----
-
 ## Domain
 
-<!-- What topic or category of knowledge does your system cover?
-     Why is this knowledge valuable, and why is it hard to find through official channels?
-     Example: "Student reviews of CS professors at [university] — useful because official
-     course descriptions don't reflect teaching style, exam difficulty, or workload." -->
+Upperclassmen's experiences with freshmen course selection.
 
-Incoming freshmen course selection experience at Colby College. This is a knowledge base of
-upperclassmen's experiences with their freshman year course selection period — the good and the
-bad. Unlike official sites that state only facts, this knowledge base captures the hustle of
-students and the strategies they found helpful. That knowledge is scattered across different
-platforms like Reddit, so this project centralizes it.
+Unlike official sites that state only facts, this knowledge base captures the hustle of students and the strategies they found helpful. That knowledge is scattered across different platforms like Reddit, so this project centralizes it.
 
 ---
 
 ## Document Sources
-
-<!-- List every source you collected documents from.
-     Be specific: include URLs, subreddit names, forum thread titles, or file names.
-     Aim for variety — sources that together cover different subtopics or perspectives. -->
 
 | # | Source | Type | URL or file path |
 |---|--------|------|-----------------|
@@ -45,56 +27,104 @@ platforms like Reddit, so this project centralizes it.
 
 ## Chunking Strategy
 
-<!-- Describe your chunking approach with enough specificity that someone else could reproduce it.
-     Include:
-     - Chunk size (characters or tokens) and why that size fits your documents
-     - Overlap size and why (or why not) you used overlap
-     - Any preprocessing you did before chunking (e.g., stripping HTML, removing headers)
-     - What your final chunk count was across all documents -->
-
 **Chunk size:**
-Paragraph-level chunking (~100 tokens). The document text is stepped through paragraph by paragraph.
+Paragraph-level chunking — the document text is split on blank lines, so one chunk = one paragraph.
+Chunk size is therefore variable rather than a fixed target: chunks average ~64 words (≈ 85 tokens),
+with most paragraphs running 3–6 sentences. (A few outliers exist — short list-style lines in
+`classes.txt` at one extreme, and one long multi-sentence forum reply at ~320 words at the other.)
 
 **Overlap:**
 No overlap.
 
-**Why these choices fit your documents:**
-In the documents, each paragraph expresses a complete thought, responding to a specific question.
-The paragraphs are of moderate size (3–6 sentences), resulting in a chunk size of about 100 tokens.
-Because each paragraph already stands as a self-contained unit, no overlap is needed between chunks.
+**Why these choices fit my documents:**
+In the documents, each paragraph expresses a complete thought — a single forum reply or a single
+requirement paragraph responding to a specific question. Because each paragraph already stands as a
+self-contained unit, splitting on paragraph boundaries keeps a complete idea in one chunk, and no
+overlap is needed between chunks. Preprocessing is minimal: each paragraph's internal newlines and
+extra whitespace are collapsed into a single clean block, and empty paragraphs are dropped.
 
 **Final chunk count:**
+
+227 chunks across the 4 source documents — `classes.txt` (109), `reddit_thread_1.txt` (68),
+`colby.txt` (43), and `quora.txt` (7).
+
+**Sample chunks (with source document):**
+
+| # | Source document | Chunk text |
+|---|-----------------|------------|
+| 1 | `colby.txt` | "Diversity Requirements — Students are required to pass two three- or four-credit-hour courses that have as a central focus overcoming prejudice, privilege, oppression, inequality, and injustice. Thus, typically structures, workings, progress, and consequences of political and cultural changes directed for or against this focus constitute most of the course." |
+| 2 | `classes.txt` | "In order to graduate, Colby students must demonstrate proficiency in a foreign language. They can do so through successful completion of a language course designated as 127… Alternatively, students may fulfill this requirement by means of a proficiency exam." |
+| 3 | `reddit_thread_1.txt` | "Comments: If you've taken AP CS, you can likely place out of the intro CS courses (CS151/152). That's what I did, and it'll put you slightly ahead. If not, I've heard great things about CS151/152 regardless…" |
+| 4 | `reddit_thread_1.txt` | "I would definitely recommend taking four classes, you could still graduate with three, but most people take four, and your advisor will likely suggest u take a fourth… taking only three courses will ease up your workload a lot." |
+| 5 | `quora.txt` | "Question: What are some of the best courses to take for freshman year?" |
 
 ---
 
 ## Embedding Model
 
-<!-- Name the embedding model you used and explain your choice.
-     Then answer: if you were deploying this system for real users and cost wasn't a constraint,
-     what tradeoffs would you weigh in choosing a different model?
-     Consider: context length limits, multilingual support, accuracy on domain-specific text,
-     latency, and local vs. API-hosted. -->
-
 **Model used:**
-all-MiniLM-L6-v2 via sentence-transformers. Top-k retrieval is set to 3, since the top 3 most
-relevant chunks result in less noise in generated responses.
+all-MiniLM-L6-v2 via sentence-transformers. Top-k retrieval is set to 3, since the top 3 most relevant chunks result in less noise in generated responses.
 
 **Production tradeoff reflection:**
-In production, a more complex model (e.g. OpenAI's `text-embedding-3-large`) would produce more
-accurate results. However, that would come at a cost and add latency from network calls.
+In production, a more complex model (e.g. OpenAI's `text-embedding-3-large`) would produce more accurate results. However, that would come at a cost and add latency from network calls.
+
+---
+
+## Retrieval Examples
+
+<!-- For each query, the top chunks returned by retrieve() at top-k=3, with their source document
+     and cosine distance (lower = more similar). -->
+
+**Example 1 — "If I took AP Computer Science, can I skip the intro CS courses?"**
+
+| Rank | Source | Distance | Chunk (truncated) |
+|------|--------|----------|-------------------|
+| 1 | `reddit_thread_1.txt` | 0.287 | "If you've taken AP CS, you can likely place out of the intro CS courses (CS151/152). That's what I did, and it'll put you slightly ahead…" |
+| 2 | `reddit_thread_1.txt` | 0.412 | "Reason I say especially CS is when u get to major courses, those r a bit competitive… it's always overenrolled…" |
+| 3 | `reddit_thread_1.txt` | 0.429 | "Hey, skipping cs151 means being placed right into cs231 or cs166? If the former, who should I contact to test out of the intro cs classes?" |
+
+*Why these chunks are relevant:* The query is about placing out of intro CS via AP credit. Chunk 1 is
+a direct, near-verbatim match — it explicitly answers that AP CS lets you place out of CS151/152 — so
+it ranks first with the lowest distance. Chunk 3 is the natural follow-up question about which course
+you land in (CS231) and who to contact, which is closely related context. Chunk 2 is the weakest of
+the three (distance 0.43): it is about CS course competitiveness generally, retrieved because it
+shares CS vocabulary, but it does not address placement — illustrating how the third slot can pull in
+loosely-related material.
+
+**Example 2 — "Should I take four or five classes my first semester?"**
+
+| Rank | Source | Distance | Chunk (truncated) |
+|------|--------|----------|-------------------|
+| 1 | `reddit_thread_1.txt` | 0.206 | "I would definitely recommend taking four classes, you could still graduate with three, but most people take four…" |
+| 2 | `reddit_thread_1.txt` | 0.243 | "I actually don't know if I recommend taking three classes only in your starting semester. I did four and it was fine…" |
+| 3 | `reddit_thread_1.txt` | 0.302 | "That's actually not necessarily true. You'll have to take at least 3 JanPlan courses… you can easily take 3 classes 'for free' one semester." |
+
+*Why these chunks are relevant:* All three are first-year students directly weighing how many classes
+to take in the first semester — exactly the decision the query asks about. Chunks 1 and 2 give the
+clearest answer (most people take four; four is manageable), which is why they have the two lowest
+distances. The retrieval here is strong because the corpus contains a dense cluster of advice on
+exactly this question, and all three returned chunks are on-topic.
+
+**Example 3 — "Can I test out of the language requirement?"**
+
+| Rank | Source | Distance | Chunk (truncated) |
+|------|--------|----------|-------------------|
+| 1 | `reddit_thread_1.txt` | 0.328 | "Dont we have to take a language class as well? You are allowed to test out of language if u have a foreign language ur good at. Many internationals do it…" |
+| 2 | `classes.txt` | 0.426 | "In order to graduate, Colby students must demonstrate proficiency in a foreign language… Alternatively, students may fulfill this requirement by means of a proficiency exam." |
+| 3 | `classes.txt` | 0.443 | "If you want to study a language you have not studied before, register for the first of the three courses (usually 125)…" |
+
+*Why these chunks are relevant:* This query benefits from retrieval across two different source
+documents. Chunk 1 (Reddit) gives the casual student-experience answer ("you are allowed to test
+out"), while chunk 2 (the official `classes.txt`) confirms it formally via the proficiency exam — the
+two corroborate each other, which is exactly the kind of cross-source grounding the system is meant to
+surface.
 
 ---
 
 ## Grounded Generation
 
-<!-- Explain how your system enforces grounding — how does it prevent the LLM from answering
-     beyond the retrieved documents?
-     Describe both your system prompt (what instruction you gave the model) and any structural
-     choices (e.g., how you formatted the context, whether you filtered low-relevance chunks).
-     Do not just say "I told it to use the documents" — show the actual instruction or explain
-     the mechanism. -->
-
 **System prompt grounding instruction:**
+
 The model receives this system message, which constrains it to the retrieved context and forbids
 outside knowledge:
 
@@ -130,6 +160,43 @@ document inline in its answer (e.g. "(source: reddit_thread_1.txt)"). The source
 chunk because `retrieve()` returns a `source` field (stored as ChromaDB metadata at ingest time). The
 Gradio interface also renders a separate "Retrieved from" panel listing the de-duplicated source
 documents used to ground the response.
+
+**Example responses with source attribution (verbatim system output):**
+
+> **Query:** If I took AP Computer Science, can I skip the intro CS courses?
+>
+> **Response:** According to the context provided in [1] (source: reddit_thread_1.txt), "If you've
+> taken AP CS, you can likely place out of the intro CS courses (CS151/152)". This suggests that yes,
+> you can likely skip the intro CS courses if you've taken AP Computer Science.
+
+> **Query:** Can I test out of the language requirement?
+>
+> **Response:** According to the context provided in [2] (source: classes.txt), "Alternatively,
+> students may fulfill this requirement by means of a proficiency exam." This implies that yes, you
+> can test out of the language requirement by taking a proficiency exam. Additionally, [1] (source:
+> reddit_thread_1.txt) and [3] (source: classes.txt) also support this, with [1] stating "You are
+> allowed to test out of language if u have a foreign language ur good at"…
+
+In both cases the source document is named inline in the output text, and the second example shows the
+model grounding a single answer in two different sources (`classes.txt` and `reddit_thread_1.txt`).
+
+**Out-of-scope query (refusal):**
+
+> **Query:** What is the best dining hall at Colby and what are its hours?
+>
+> **Response:** The provided context does not mention the best dining hall at Colby or its hours. The
+> context only discusses classes, professors, and essential dorm items, but does not provide
+> information about dining halls.
+
+The corpus covers course selection, not dining. Because the system prompt forbids drawing on outside
+knowledge and only the top-k=3 retrieved chunks are available, the model declines to answer rather
+than fabricating dining-hall information — demonstrating that grounding holds for off-topic queries.
+
+---
+
+## Query Interface
+
+![interface](interface.png)
 
 ---
 
@@ -202,30 +269,23 @@ structure of these sources.
      Answer both questions with at least 2–3 sentences each. -->
 
 **One way the spec helped you during implementation:**
+It made my prompt conscise and well crafted. I just reference sections of my planning.md in my prompts and that is it! 
 
 **One way your implementation diverged from the spec, and why:**
+My implementation never diverged from the spec. I attribute this to the modular approach that I used in my prompting. I asked claude to do small, specific tasks one at a time
 
 ---
 
 ## AI Usage
 
-<!-- Describe at least 2 specific instances where you used an AI tool during this project.
-     For each: what did you give the AI as input, what did it produce, and what did you
-     change, override, or direct differently?
-
-     "I used Claude to help me code" is not sufficient.
-     "I gave Claude my Chunking Strategy section from planning.md and asked it to implement
-     chunk_text(). It returned a function using a fixed character split. I overrode the
-     chunk size from 500 to 200 because my documents are short reviews, not long guides." -->
-
 **Instance 1**
 
-- *What I gave the AI:*
-- *What it produced:*
-- *What I changed or overrode:*
+- *What I gave the AI:* my Chunking Strategy section and documents folder and asked it to implement chunk_text() and load_documents() in an ingest.py
+- *What it produced:* It returned the ingest.py containing the two functions as instructed
+- *What I changed or overrode:* I deleted the main function it had included for testing purposes
 
 **Instance 2**
 
-- *What I gave the AI:*
-- *What it produced:*
-- *What I changed or overrode:*
+- *What I gave the AI:* The Gradio template for the UI and asked it to implement a similar interface for the system
+- *What it produced:* It produced a minimalist UI
+- *What I changed or overrode:* I instructed it to add colors and make the UI chat-like

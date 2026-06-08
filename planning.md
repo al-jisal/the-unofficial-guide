@@ -36,14 +36,14 @@ Paragraph-based splitting. The documents texts are stepped through in paragraphs
 there is no overlap between chunks.
 
 **Chunk size:**
-Paragraph-level chunking (100 tokens)
+Paragraph-level chunking (variable size; averages ~85 tokens, most paragraphs 3–6 sentences)
 
 **Overlap:**
 No overlap
 
 **Reasoning:**
 In the document, each paragraph expresses a complete thought, responding to a specific question
-The paragraphs are of moderate sizes (3 - 6 sentences), resulting in a chunk size of about 100 tokens
+The paragraphs are of moderate sizes (3 - 6 sentences), resulting in a chunk size of about 85 tokens on average
 
 ---
 

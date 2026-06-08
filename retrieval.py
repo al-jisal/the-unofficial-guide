@@ -57,6 +57,26 @@ def embed_store(chunks):
     return collection.count()
 
 
+def ensure_store():
+    """Populate the vector store from documents/ if it is empty.
+
+    Idempotent and safe to call on every startup: if the collection already
+    holds chunks it returns immediately, so the app self-heals from an empty
+    or missing store instead of silently answering "not in context".
+    """
+    collection = _get_collection()
+    if collection.count() > 0:
+        return collection.count()
+
+    # Imported lazily to avoid a hard dependency when only querying.
+    from ingest import chunk_documents, load_documents
+
+    chunks = []
+    for doc in load_documents():
+        chunks.extend(chunk_documents(doc["text"], doc["filename"]))
+    return embed_store(chunks)
+
+
 def retrieve(query, n_results=5):
     """Retrieve the `n_results` most relevant chunks for `query`.
 

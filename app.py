@@ -15,6 +15,7 @@ import html as _html
 import gradio as gr
 
 from generator import generate
+from retrieval import ensure_store
 
 # --- Colby brand palette -------------------------------------------------
 COLBY_BLUE = "#002169"
@@ -289,4 +290,8 @@ with gr.Blocks(title="The Unofficial Guide") as demo:
     inp.submit(handle_query, inputs=[inp, history], outputs=[chat, history, inp])
 
 if __name__ == "__main__":
+    # Populate the vector store if it's empty so the app never launches against
+    # an empty index (which would make every answer "not in context").
+    count = ensure_store()
+    print(f"Vector store ready — {count} chunks indexed.")
     demo.launch(inbrowser=True, theme=theme, css=CSS)
