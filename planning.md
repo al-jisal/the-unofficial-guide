@@ -1,10 +1,5 @@
 # Project 1 Planning: The Unofficial Guide
 
-> Write this document before you write any pipeline code.
-> Your spec and architecture diagram are what you'll use to direct AI tools (Claude, Copilot, etc.) to generate your implementation — the more specific they are, the more useful the generated code will be.
-> Update the Retrieval Approach and Chunking Strategy sections if you change your approach during implementation.
-> Update this file before starting any stretch features.
-
 ---
 
 ## Domain
@@ -19,8 +14,6 @@ of students and the strategies they found helpful. It is, however, scattered acr
 
 ## Documents
 
-<!-- List your specific sources: URLs, subreddit names, forum threads, or file descriptions.
-     Aim for at least 10 sources that together cover different subtopics or perspectives within your domain. -->
 
 | # | Source | Description | URL or location |
 |---|--------|-------------|-----------------|
@@ -39,10 +32,6 @@ of students and the strategies they found helpful. It is, however, scattered acr
 
 ## Chunking Strategy
 
-<!-- How will you split documents into chunks?
-     State your chunk size (in tokens or characters), overlap size, and explain why those
-     numbers fit the structure of your documents.
-     A review-heavy corpus warrants different chunking than a long FAQ. -->
 Paragraph-based splitting. The documents texts are stepped through in paragraphs, as a result
 there is no overlap between chunks.
 
@@ -60,12 +49,6 @@ The paragraphs are of moderate sizes (3 - 6 sentences), resulting in a chunk siz
 
 ## Retrieval Approach
 
-<!-- Which embedding model are you using (e.g., all-MiniLM-L6-v2 via sentence-transformers)?
-     How many chunks will you retrieve per query (top-k)?
-     If you were deploying this for real users and cost wasn't a constraint, what tradeoffs
-     would you weigh in choosing a different embedding model — context length, multilingual
-     support, accuracy on domain-specific text, latency? -->
-
 **Embedding model:**
 all-MiniLM-L6-v2 via sentence-transformers
 
@@ -81,10 +64,6 @@ However, that would come at a cost and add latency from network calls
 
 ## Evaluation Plan
 
-<!-- List your 5 test questions with their expected correct answers.
-     Questions should be specific enough that you can judge whether the system's response
-     is right or wrong. "What are good dining halls?" is too vague.
-     "What do students say about wait times at [dining hall name] during lunch?" is testable. -->
 
 | # | Question | Expected answer |
 |---|----------|-----------------|
@@ -110,11 +89,6 @@ However, that would come at a cost and add latency from network calls
 
 ## Architecture
 
-<!-- Draw a diagram of your pipeline showing the five stages:
-     Document Ingestion → Chunking → Embedding + Vector Store → Retrieval → Generation
-     Label each stage with the tool or library you're using.
-     You can use ASCII art, a Mermaid diagram, or embed a sketch as an image.
-     You'll use this diagram as context when prompting AI tools to implement each stage. -->
 ```
 Student query
     │
@@ -149,7 +123,40 @@ Student query
      with my specified chunk size and overlap" is a plan. -->
 
 **Milestone 3 — Ingestion and chunking:**
+```
+I'll ask claude to write the following functions in a file named ingest.py:
+
+load_documents() -> loads all .txt files from the documents folder. it returns a list of dictionaries, where each dictionary corresponds to each .txt file. Each dictionary has the following keys: "filename" and "text"
+
+chunk_documents(text, filename) -> chunks `text` using my Chunking Strategy section. it returns a list of dictionaries each with keys: "text"(the chunk text) and chunk_id(a unique identifier, e.g `filename`_1)
+```
 
 **Milestone 4 — Embedding and retrieval:**
 
+```
+I'll instruct claude that using the Embedding + vector store from the Architecture section in the plannin.md, implement the following functions in a file called retrieval.py:
+
+embed_store(chunks) -> embeds each chunk using all-MiniLM-L6-v2 model, stores the text and the chunk id in a chromaDB
+
+retrieve.py(query, n_results) -> retrieves n_results relevant chunks for the user's query, returns a list of dicts, each with the text and the distance (the similarity score (lower = more similar for cosine))
+```
+
 **Milestone 5 — Generation and interface:**
+```
+I'll ask cluade to implement the following using part 5 of the architecture in generator.py:
+
+generate a response to the student's query using groq. Use the string below as the system input
+"""
+You're the go-to assistant at Colby College when newly admitted students have questions concerning course selection.
+Answer the students' question using only the context provided below. If the answer is not in the text, say so clearly
+— do not guess or draw on outside knowledge. cite the documents answers are sourced from
+""" 
+
+For the user input, construct it following the instructions below:
+"""
+Context:
+    add the retrieved chunks under this section
+Query:
+    add the student's question under this section
+"""
+```
