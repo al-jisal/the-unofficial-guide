@@ -9,24 +9,13 @@
 
 ## Domain
 
-<!-- What topic or category of knowledge does your system cover?
-     Why is this knowledge valuable, and why is it hard to find through official channels?
-     Example: "Student reviews of CS professors at [university] — useful because official
-     course descriptions don't reflect teaching style, exam difficulty, or workload." -->
+Upperclassmen's experiences with freshmen course selection.
 
-Incoming freshmen course selection experience at Colby College. This is a knowledge base of
-upperclassmen's experiences with their freshman year course selection period — the good and the
-bad. Unlike official sites that state only facts, this knowledge base captures the hustle of
-students and the strategies they found helpful. That knowledge is scattered across different
-platforms like Reddit, so this project centralizes it.
+Unlike official sites that state only facts, this knowledge base captures the hustle of students and the strategies they found helpful. That knowledge is scattered across different platforms like Reddit, so this project centralizes it.
 
 ---
 
 ## Document Sources
-
-<!-- List every source you collected documents from.
-     Be specific: include URLs, subreddit names, forum thread titles, or file names.
-     Aim for variety — sources that together cover different subtopics or perspectives. -->
 
 | # | Source | Type | URL or file path |
 |---|--------|------|-----------------|
@@ -53,14 +42,14 @@ platforms like Reddit, so this project centralizes it.
      - What your final chunk count was across all documents -->
 
 **Chunk size:**
-Paragraph-level chunking (~100 tokens). The document text is stepped through paragraph by paragraph.
+Paragraph-level chunking (~500 tokens). The document text is stepped through paragraph by paragraph.
 
 **Overlap:**
 No overlap.
 
 **Why these choices fit your documents:**
 In the documents, each paragraph expresses a complete thought, responding to a specific question.
-The paragraphs are of moderate size (3–6 sentences), resulting in a chunk size of about 100 tokens.
+The paragraphs are of moderate size (3–6 sentences), resulting in a chunk size of about 500 tokens.
 Because each paragraph already stands as a self-contained unit, no overlap is needed between chunks.
 
 **Final chunk count:**
@@ -69,30 +58,15 @@ Because each paragraph already stands as a self-contained unit, no overlap is ne
 
 ## Embedding Model
 
-<!-- Name the embedding model you used and explain your choice.
-     Then answer: if you were deploying this system for real users and cost wasn't a constraint,
-     what tradeoffs would you weigh in choosing a different model?
-     Consider: context length limits, multilingual support, accuracy on domain-specific text,
-     latency, and local vs. API-hosted. -->
-
 **Model used:**
-all-MiniLM-L6-v2 via sentence-transformers. Top-k retrieval is set to 3, since the top 3 most
-relevant chunks result in less noise in generated responses.
+all-MiniLM-L6-v2 via sentence-transformers. Top-k retrieval is set to 3, since the top 3 most relevant chunks result in less noise in generated responses.
 
 **Production tradeoff reflection:**
-In production, a more complex model (e.g. OpenAI's `text-embedding-3-large`) would produce more
-accurate results. However, that would come at a cost and add latency from network calls.
+In production, a more complex model (e.g. OpenAI's `text-embedding-3-large`) would produce more accurate results. However, that would come at a cost and add latency from network calls.
 
 ---
 
 ## Grounded Generation
-
-<!-- Explain how your system enforces grounding — how does it prevent the LLM from answering
-     beyond the retrieved documents?
-     Describe both your system prompt (what instruction you gave the model) and any structural
-     choices (e.g., how you formatted the context, whether you filtered low-relevance chunks).
-     Do not just say "I told it to use the documents" — show the actual instruction or explain
-     the mechanism. -->
 
 **System prompt grounding instruction:**
 The model receives this system message, which constrains it to the retrieved context and forbids
@@ -202,30 +176,23 @@ structure of these sources.
      Answer both questions with at least 2–3 sentences each. -->
 
 **One way the spec helped you during implementation:**
+It made my prompt conscise and well crafted. I just reference sections of my planning.md in my prompts and that is it! 
 
 **One way your implementation diverged from the spec, and why:**
+My implementation never diverged from the spec. I attribute this to the modular approach that I used in my prompting. I asked claude to do small, specific tasks one at a time
 
 ---
 
 ## AI Usage
 
-<!-- Describe at least 2 specific instances where you used an AI tool during this project.
-     For each: what did you give the AI as input, what did it produce, and what did you
-     change, override, or direct differently?
-
-     "I used Claude to help me code" is not sufficient.
-     "I gave Claude my Chunking Strategy section from planning.md and asked it to implement
-     chunk_text(). It returned a function using a fixed character split. I overrode the
-     chunk size from 500 to 200 because my documents are short reviews, not long guides." -->
-
 **Instance 1**
 
-- *What I gave the AI:*
-- *What it produced:*
-- *What I changed or overrode:*
+- *What I gave the AI:* my Chunking Strategy section and documents folder and asked it to implement chunk_text() and load_documents() in an ingest.py
+- *What it produced:* It returned the ingest.py containing the two functions as instructed
+- *What I changed or overrode:* I deleted the main function it had included for testing purposes
 
 **Instance 2**
 
-- *What I gave the AI:*
-- *What it produced:*
-- *What I changed or overrode:*
+- *What I gave the AI:* The Gradio template for the UI and asked it to implement a similar interface for the system
+- *What it produced:* It produced a minimalist UI
+- *What I changed or overrode:* I instructed it to add colors and make the UI chat-like
